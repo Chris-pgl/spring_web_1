@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import rest_api.start.web.dto.MachineDTO;
+
+
 
 @Entity
 public class Machine {
@@ -29,6 +32,11 @@ public class Machine {
         setName(name);
         setDescription(description);
         setPrice(price);
+    }
+
+    public Machine(MachineDTO machineDto) {
+
+        this(machineDto.getName(), machineDto.getDescription(), machineDto.getPrice());
     }
 
     public int getId() {
@@ -61,6 +69,15 @@ public class Machine {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+
+    public void update(MachineDTO machineDto) {
+
+        setName(machineDto.getName());
+        if (machineDto.getDescription() != null)
+            setDescription(machineDto.getDescription());
+        setPrice(machineDto.getPrice());
     }
 
     @Override
